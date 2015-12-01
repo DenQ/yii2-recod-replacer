@@ -1,0 +1,11 @@
+{
+    "name": "root/yii2-record-replacer",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "DenQ",
+            "email": "denquick@gmail.com"
+        }
+    ],
+    "require": {}
+}

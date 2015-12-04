@@ -1,5 +1,5 @@
 {
-    "name": "root/yii2-record-replacer",
+    "name": "DenQ/yii2-record-replacer",
     "description": "Record replacer a help tool for yii2 framework",
     "keywords": ["yii2", "activerecord", "ar", "record", "replace", "insert"],
     "license": "MIT",

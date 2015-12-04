@@ -1,5 +1,7 @@
 {
     "name": "root/yii2-record-replacer",
+    "description": "Record replacer a help tool for yii2 framework",
+    "keywords": ["yii2", "activerecord", "ar", "record", "replace"],
     "license": "MIT",
     "authors": [
         {
@@ -7,5 +9,7 @@
             "email": "denquick@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "yiisoft/yii2": ">=2.0.6"
+    }
 }

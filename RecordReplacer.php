@@ -9,7 +9,7 @@
  * Time: 20:43
  */
 
-namespace app\components\RecordReplacer;
+namespace RecordReplacer;
 
 class RecordReplacer {
 

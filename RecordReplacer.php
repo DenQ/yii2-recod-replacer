@@ -17,8 +17,9 @@ class RecordReplacer {
      * @var \yii\db\ActiveRecord null
      */
     public $model = null;
-    public $params = null;
-    public $primary = null;
+    public $params = [];
+    public $primary = [];
+    public $exclusion = [];
 
     /**
      * @var \yii\db\ActiveRecord null
@@ -39,10 +40,11 @@ class RecordReplacer {
      * @param $model \yii\db\ActiveRecord
      * @param $params mixed
      * @param $primary mixed
+     * @param $primary mixed
      * @return string
      */
-    public function Run($model, $params, $primary = []) {
-        $this->SetVariables($model, $params, $primary);
+    public function Run($model, $params, $primary = [], $exclusion = []) {
+        $this->SetVariables($model, $params, $primary, $exclusion);
         if ( $this->Get() === null ) {
             $result = $this->Post();
         } else {
@@ -63,13 +65,21 @@ class RecordReplacer {
     }
 
     private function Put() {
-        $params = $this->params;
         $params = [
-            $this->GetClassName() => $params,
+            $this->GetClassName() => $this->ExclusionFilter(),
         ];
         if ($this->resultModel->load($params) && $this->resultModel->save()) {
             return $this->resultModel;
         } return null;
+    }
+
+    private function ExclusionFilter() {
+        $results = [];
+        foreach($this->params as $key => $val) {
+            if (!in_array($key, $this->exclusion)) {
+                $results[$key] = $val;
+            }
+        } return $results;
     }
 
     private function Get() {
@@ -90,16 +100,18 @@ class RecordReplacer {
         } return $criteria;
     }
 
-    private function SetVariables($model, $params, $primary = []) {
+    private function SetVariables($model, $params, $primary = [], $exclusion = []) {
         $this->model = $model;
         $this->params = $params;
         $this->primary = $primary;
+        $this->exclusion = $exclusion;
     }
 
     private function CleanVariables() {
         $this->model = null;
-        $this->params = null;
-        $this->primary = null;
+        $this->params = [];
+        $this->primary = [];
+        $this->exclusion = [];
         $this->resultModel = null;
     }
 
